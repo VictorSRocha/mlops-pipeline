@@ -83,9 +83,38 @@ Toda falha demonstrada no episódio deve ter:
 
 > **Nota:** o Ep01 usa `introducao-ep01.html` em vez de `ep01-apoio-video.html` (legado). A partir do Ep02 o padrão correto é seguido.
 
+## Gestão de Memória
+
+### Limites
+- Máximo **~12 arquivos** de memória. Nunca criar arquivo por sessão ou por episódio individual.
+- Cada arquivo deve caber em **~30 linhas** (excluindo frontmatter). Se crescer além disso, sanitizar.
+
+### Princípio: foto do estado atual, não diário
+Cada memória registra **o estado corrente**, não o histórico. O git já versiona os arquivos — o passado fica nos commits, não na memória.
+
+### Regras de sanitização (aplicar a cada atualização)
+1. **Substituir, não acumular** — ao atualizar `progresso-atual`, sobrescrever com o estado novo; não adicionar ao que tinha.
+2. **Uma linha por item** — `episodios-nivel-N` tem 1 linha por episódio com status atual; notas detalhadas de sessões anteriores são descartadas.
+3. **Remover o resolvido** — problemas corrigidos, decisões já aplicadas no código e informações temporárias saem na próxima atualização.
+4. **Deletar o obsoleto** — se uma memória inteira perdeu relevância (ex: uma regra que mudou completamente), deletar o arquivo e remover do MEMORY.md.
+5. **Não duplicar o que o CLAUDE.md já diz** — memórias guardam contexto e porquês; regras de ação ficam no CLAUDE.md.
+
+### Categorias fixas de memória
+| Categoria | Arquivo | Atualização |
+|---|---|---|
+| Perfil do usuário | `user-profile` | Raro |
+| Visão geral do projeto | `trilha-mlops-overview` | Raro |
+| Estrutura de pastas | `estrutura-pastas` | Quando mudar pastas |
+| Progresso | `progresso-atual` | Toda sessão (sobrescrever) |
+| Playbooks | `playbooks-serie` | Raro |
+| Contexto das regras | `regras-codigo` | Quando regras mudarem |
+| Mapa de episódios | `episodios-nivel-N` | Quando status de ep mudar |
+| Repositórios GitHub | `github-repos` | Quando config mudar |
+
 ## Encerramento de Sessão
 
 Quando o Victor disser "vamos encerrar", "terminamos por hoje", ou indicar fim de sessão:
-1. Atualizar a memória `progresso-atual.md` com o que foi feito e o que ficou pendente
-2. Incluir data, episódio trabalhado, arquivos alterados e próximos passos
-3. Confirmar ao Victor o que foi salvo
+1. **Sanitizar e atualizar** `progresso-atual.md` — sobrescrever com estado corrente, não acumular
+2. Incluir: data, episódio trabalhado, o que foi feito, próximos passos
+3. Atualizar mapa do episódio em `episodios-nivel-N.md` se status mudou
+4. Confirmar ao Victor o que foi salvo
