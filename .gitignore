@@ -1,0 +1,48 @@
+# ===== Ambiente Virtual Python =====
+trilha-mlops/
+.venv/
+venv/
+env/
+
+# ===== Variáveis de ambiente (segredos) =====
+.env
+
+# ===== Jupyter Notebook =====
+.ipynb_checkpoints/
+
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# ===== Dados (versionados pelo DVC, não pelo Git) =====
+data/raw/*.parquet
+data/raw/*.csv
+data/raw/*.json
+data/processed/
+data/features/
+exemplos/data/
+
+# ===== Modelos (pesados) =====
+models/*.joblib
+models/*.pkl
+
+# ===== DVC =====
+*.dvc
+/dvc.lock
+
+# ===== IDE / Claude Code =====
+.vscode/
+.idea/
+.claude/
+
+# ===== SO =====
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# ===== Arquivos de cópia soltos =====
+*- Copia.*
+*- Copia *
