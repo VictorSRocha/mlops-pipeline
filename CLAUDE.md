@@ -145,6 +145,8 @@ Regras:
 4. **Descartar o que é só desta sessão** — o que o git já registra não vira lição.
 
 ### Checklist de validação antes de gravar um episódio
+**Ao criar ou alterar roteiro, notebook, HTML ou código de episódio, invocar a skill `validar-episodio` antes de dar o trabalho como entregue** — ela executa o procedimento abaixo (inclui a auditoria da seção 1.4 do `playbook-roteiros.md` e a paridade HTML ↔ notebook ↔ roteiro). O checklist resume o que ela cobre:
+
 1. Rodar `pytest` do episódio (todos passando) e **executar o notebook célula a célula** — sem saídas de erro.
 2. Comparar HTML de conceitos ↔ notebook ↔ roteiro por parte (paridade; ver seção acima).
 3. **Rodar o que o roteiro/HTML afirma** — explicações técnicas (ex.: "o dict seria compartilhado") devem ser verificadas executando o código, não apenas lendo.
