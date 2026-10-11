@@ -36,6 +36,7 @@ Nunca gerar um HTML, roteiro ou código de episódio sem antes consultar o playb
 5. **Ler antes de editar** — sempre ler o arquivo existente antes de alterá-lo para estar atualizado
 6. **Gerar apenas os alterados** — não regenerar arquivos que não mudaram
 7. **Imports encadeados** — cada episódio importa dos anteriores; nunca quebrar a cadeia
+8. **Instalação por parte** — nos notebooks, cada parte abre com uma célula `!pip install` apenas com os pacotes que o código daquela parte importa (versões do `requirements.txt`)
 
 ## Entregáveis por Episódio
 
