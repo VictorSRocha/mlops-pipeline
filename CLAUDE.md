@@ -41,7 +41,7 @@ Nunca gerar um HTML, roteiro ou código de episódio sem antes consultar o playb
 
 Ao criar um novo episódio, sempre gerar:
 1. **Arquivos de código** (.py) com comentários didáticos + testes
-2. **Roteiro do episódio** (roteiro-epNN.md completo + roteiros por parte `roteiro-epNN-parteM.md`; o roteiro enxuto foi descontinuado)
+2. **Roteiro do episódio** (roteiro-epNN.md completo + roteiros por parte `roteiro-epNN-parteM.md`)
 3. **HTML pré-episódio** (epNN-apoio-video.html) — abertura visual para o vídeo
 4. **HTML de conceitos** (epNN-conceitos.html) — material de estudo completo
 5. **Guia interno** (guia-interno-epNN-apoio-video.md) — cola para o apresentador
