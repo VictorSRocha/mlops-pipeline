@@ -12,7 +12,7 @@ Para progresso atual, episódios e mapa de pastas → consultar memórias persis
 |-------|--------|
 | `C:\mlops-pipeline` (ESTE dir) | Gravação de vídeos / montagem ao vivo. **Sem arquivos de contexto.** |
 | `C:\Users\victo\Downloads\Serie_Mlops` | Materiais da série (playbooks, episódios, HTMLs) |
-| `...\Serie_Mlops\arquivos_contexto\` | Playbooks, documento mestre, HTML Ep01, artigo Google |
+| `...\Serie_Mlops\arquivos_contexto\` | Somente referências: playbooks, documento mestre, artigo Google, texto do portfólio (arquivos de episódio ficam em `nivel_0\mlops-epNN\`) |
 | `...\Serie_Mlops\nivel_0\mlops-epNN\` | Arquivos de cada episódio (código, roteiro, HTML, vídeos) |
 | `...\Serie_Mlops\imagens\`, `videos\` | **NÃO LER** salvo pedido explícito (pesados) |
 
@@ -45,6 +45,13 @@ Ao criar um novo episódio, sempre gerar:
 3. **HTML pré-episódio** (epNN-apoio-video.html) — abertura visual para o vídeo
 4. **HTML de conceitos** (epNN-conceitos.html) — material de estudo completo
 5. **Guia interno** (guia-interno-epNN-apoio-video.md) — cola para o apresentador
+
+## Paridade HTML de Conceitos ↔ Notebook
+
+Tudo que o `epNN-conceitos.html` aborda deve ter uma **célula de demo isolada** no notebook do episódio (padrão `demo-*`: conceito → exemplo executável → conexão com o código real).
+- Ao criar/alterar o HTML ou o notebook, comparar os dois por parte e preencher o que faltar no lado defasado
+- **Não repetir** conceitos já demonstrados em episódios anteriores (consultar `episodios-nivel-N` e notebooks anteriores); nesses casos, apenas citar "visto no EpNN" no HTML
+- Conceitos só embutidos em uma classe/função (sem demo isolada) contam como faltantes
 
 ## Identidade Visual dos HTMLs
 
@@ -118,3 +125,30 @@ Quando o Victor disser "vamos encerrar", "terminamos por hoje", ou indicar fim d
 2. Incluir: data, episódio trabalhado, o que foi feito, próximos passos
 3. Atualizar mapa do episódio em `episodios-nivel-N.md` se status mudou
 4. Confirmar ao Victor o que foi salvo
+5. **Lições aprendidas** — executar a seção abaixo antes de dar a sessão por encerrada
+
+## Lições Aprendidas (obrigatório ao encerrar e após correções relevantes)
+
+Antes de encerrar, revisar a sessão e perguntar: *o que descobrimos que não estava escrito em lugar nenhum?* Para cada lição, registrar **no lugar certo** (uma vez só, sem duplicar):
+
+| Tipo de lição | Destino |
+|---|---|
+| Regra de ação que deve valer sempre (como fazer / não fazer) | `CLAUDE.md` |
+| Boa prática de produção de roteiro / HTML / código de episódio | o `playbook-*.md` correspondente em `arquivos_contexto/` |
+| Contexto, porquê, preferência do Victor, estado do projeto | memória da categoria existente (respeitar o limite de ~12 arquivos) |
+| Procedimento repetido 2+ vezes, com passos fixos | propor uma **skill** nova |
+
+Regras:
+1. **Listar as lições ao Victor e pedir confirmação** antes de gravar em `CLAUDE.md`, playbooks ou criar skill. Memórias podem ser atualizadas direto.
+2. **Atualizar antes de criar** — se já existe regra/memória sobre o assunto, editar a existente.
+3. **Corrigir a causa, não só o sintoma** — se um bug revelou uma lacuna (ex.: falta de teste), a lição inclui o teste/checagem que a cobre.
+4. **Descartar o que é só desta sessão** — o que o git já registra não vira lição.
+
+### Checklist de validação antes de gravar um episódio
+1. Rodar `pytest` do episódio (todos passando) e **executar o notebook célula a célula** — sem saídas de erro.
+2. Comparar HTML de conceitos ↔ notebook ↔ roteiro por parte (paridade; ver seção acima).
+3. **Rodar o que o roteiro/HTML afirma** — explicações técnicas (ex.: "o dict seria compartilhado") devem ser verificadas executando o código, não apenas lendo.
+4. Testar o caso de borda "vazio / sem novidades" de cada coletor (ex.: um ciclo sem dados novos não pode corromper o watermark).
+5. Código de apoio (`fake_*.py`, `generate_*.py`) validado contra o coletor real e sincronizado entre `Serie_Mlops` e os repos.
+6. Roteiros são **texto de fala** (sem tom de conversa/chat, sem referência à sessão de edição).
+7. Só então: commit e push (código → `mlops-pipeline`; roteiros/HTMLs/playbooks → `trilha-mlops-conteudo`).
