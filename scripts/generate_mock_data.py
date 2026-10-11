@@ -26,10 +26,19 @@ Por que dados sintéticos?
 import json
 import random
 import sqlite3
+import sys
 from pathlib import Path
 
 import pandas as pd
 import numpy as np
+
+# O console do Windows usa cp1252 e estoura UnicodeEncodeError nos '→' dos prints
+# (quebraria DEPOIS de criar o banco, e o `dvc repro` marcaria a etapa como falha).
+# Forçar UTF-8 na saída evita isso. reconfigure existe no Python 3.7+.
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+except (AttributeError, ValueError):
+    pass
 
 # Semente aleatória: garante que os dados gerados sejam SEMPRE os mesmos.
 # Sem seed, cada execução geraria dados diferentes — não reproduzível.
@@ -48,8 +57,12 @@ RAW_DIR.mkdir(parents=True, exist_ok=True)
 MOCK_DIR.mkdir(parents=True, exist_ok=True)
 
 # Configurações do dataset
-N_CUSTOMERS    = 1_000   # número de clientes
-N_TRANSACTIONS = 5_000   # número de transações (média de 5 por cliente)
+# Mesma ESCALA do notebook da Parte 2 (célula code-db-mock): 200 clientes e 1000
+# transações. A geração ainda difere do notebook em detalhes (mais nomes, pesos de
+# plano, e created_at relativo a hoje em vez de datas fixas de 2026), mas o tamanho
+# do local.db passa a ser o mesmo pelos dois caminhos.
+N_CUSTOMERS    = 200     # número de clientes
+N_TRANSACTIONS = 1_000   # número de transações (média de 5 por cliente)
 
 
 def generate_customers(n: int) -> pd.DataFrame:

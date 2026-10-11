@@ -37,6 +37,7 @@ models/*.pkl
 .vscode/
 .idea/
 .claude/
+CLAUDE.md
 
 # ===== SO =====
 Thumbs.db
